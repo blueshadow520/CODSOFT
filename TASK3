@@ -1,0 +1,97 @@
+import java.util.*;
+
+class BankAccount {
+    private int bal;
+
+    public BankAccount(int inamt) {
+        this.bal = inamt;
+    }
+
+    public int bal() {
+        return bal;
+    }
+
+    public void deposit(int amt) {
+        if (amt > 0) {
+            bal += amt;
+            System.out.println("AMOUNT DEPOSITED WAS " + amt);
+        } else {
+            System.out.println("PLEASE SELECT A VALID AMOUNT");
+        }
+    }
+
+    public void withdraw(int amt) {
+        if (amt > 0 && amt <= bal) {
+            System.out.println("WITHDRAWAL AMOUNT IS " + amt);
+            bal -= amt;
+        } else {
+            System.out.println("INSUFFICIENT BALANCE");
+        }
+    }
+}
+
+class ATM {
+
+    private BankAccount account;
+
+    public ATM(BankAccount account) {
+        this.account = account;
+    }
+
+    public void display() {
+        System.out.println("*****MAIN MENU******");
+        System.out.println("1. Deposit");
+        System.out.println("2. Withdraw");
+        System.out.println("3. Check Balance");
+        System.out.println("4. EXIT");
+    }
+
+    public void run() {
+        Scanner Sc = new Scanner(System.in);
+        int option;
+        do {
+            display();
+            System.out.println("ENTER AN OPTION");
+            option = Sc.nextInt();
+
+            switch (option) {
+                case 1:
+                    System.out.println("ENTER THE AMOUNT TO DEPOSIT");
+                    int depositAmount = Sc.nextInt();
+                    account.deposit(depositAmount);
+                    break;
+                case 2:
+                    System.out.println("ENTER THE AMOUNT TO WITHDRAW");
+                    int withdrawAmount = Sc.nextInt();
+                    account.withdraw(withdrawAmount);
+                    break;
+                case 3:
+                    System.out.println("YOUR CURRENT BALANCE IS" + account.bal());
+                    break;
+                case 4:
+                    System.out.println("COME AGAIN!!!");
+                    break;
+                default:
+                    System.out.println("INVALID CHOICE");
+            }
+        } while (option != 4);
+
+    }
+}
+
+public class Bank {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        BankAccount userAccount = new BankAccount(50000);
+        ATM atm = new ATM(userAccount);
+        System.out.println("Enter Your PIN");
+        String pin = sc.nextLine();
+        if (pin.equals("1234")) { 
+            atm.run();
+        } else {
+            System.out.println("Wrong pin");
+        }
+
+    }
+}
