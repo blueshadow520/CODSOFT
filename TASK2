@@ -1,0 +1,55 @@
+import java.util.*;
+
+public class StudentGradeCalculator
+{
+    public static void main()
+    {
+        int total=0,flag=0;
+        Scanner Sc=new Scanner(System.in);
+        System.out.println("ENTER THE TOTAL NUMBER OF SUBJECTS :");
+        int num=Sc.nextInt();
+        
+        if(num<=0)
+        {
+            System.out.println("ENTER VALID NUMBER OF SUBJECTS");
+            return;
+        }
+        
+        for(int i=1;i<=num;i++)
+        {
+            System.out.println("ENTER MARKS OF SUBJECT "+i+" (OUT OF 100 MARKS) :");
+            int marks=Sc.nextInt();
+            
+            if(marks>100 || marks<0){
+            System.out.println("ENTER MARKS IN VALID RANGE OF 0-100");
+            flag=1;
+            break;
+        }
+            
+            else 
+            total+=marks;
+            
+        }
+        
+        double avg=(double) (total/num)/100;
+        if(flag!=1)
+        {
+        System.out.println("YOUR TOTAL MARKS ARE :"+total);
+        avg=total/num;
+        System.out.println("YOUR AVERAGE MARKS ARE :"+avg);
+    }
+       if(avg<=100 && avg>=90)
+       System.out.println("YOUR GRADE IS A");
+       else if(avg>=80 && avg<90)
+       System.out.println("YOUR GRADE IS B");
+       else if(avg>=70 && avg<80)
+       System.out.println("YOUR GRADE IS C");
+       else if(avg>=60 && avg<70)
+       System.out.println("YOUR GRADE IS D");
+       else if(avg>=50 && avg<60)
+       System.out.println("YOUR GRADE IS E");
+       else if(avg<50 && avg>0)
+       System.out.println("YOUR GRADE IS F");
+    }
+}
+    
